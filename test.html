@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Sidebar Test</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+@-webkit-keyframes slideOut {
+  0% {
+    left: 0;
+  }
+  75% {
+    left: 2000px;
+    max-height: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-width: 1px;
+    overflow: hidden;
+  }
+  100% {
+    left: 2000px;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+  }
+}
+@keyframes slideOut {
+  0% {
+    left: 0;
+  }
+  75% {
+    left: 2000px;
+    max-height: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-width: 1px;
+    overflow: hidden;
+  }
+  100% {
+    left: 2000px;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+  }
+}
+@-webkit-keyframes minimize {
+  0% {
+    max-height: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-width: 1px;
+    overflow: hidden;
+  }
+  100% {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+  }
+}
+@keyframes minimize {
+  0% {
+    max-height: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-width: 1px;
+    overflow: hidden;
+  }
+  100% {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+  }
+}
+section {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+section article {
+  position: relative;
+  padding: 1rem;
+  background-color: #eee;
+  border-width: 1px;
+  border-color: #ddd;
+  border-bottom-style: solid;
+  text-align: right;
+}
+section article:last-of-type {
+  border-bottom-style: none;
+}
+section article.minimize, section article.slide-out {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  animation-iteration: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+section article.slide-out {
+  -webkit-animation-name: slideOut;
+          animation-name: slideOut;
+}
+section article.minimize {
+  -webkit-animation-name: minimize;
+          animation-name: minimize;
+}
+
+    </style>
+  </head>
+  <body>
+    <section>
+      <article data-animation-class="slide-out">
+        <p>slide-out</p>
+        <button>Remove</button>
+      </article>
+      <article data-animation-class="minimize">
+        <p>minimize</p>
+        <button>Remove</button>
+      </article>
+      <article data-animation-class="slide-out">
+        <p>slide-out</p>
+        <button>Remove</button>
+      </article>
+      <article data-animation-class="minimize">
+        <p>minimize</p>
+        <button>Remove</button>
+      </article>
+      <article data-animation-class="slide-out">
+        <p>slide-out</p>
+        <button>Remove</button>
+      </article>
+      <article data-animation-class="minimize">
+        <p>minimize</p>
+        <button>Remove</button>
+      </article>
+    </section>
+  
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+    <script>
+      var removeArticle = function(e) {
+	e.preventDefault();
+  var article = jQuery(e.delegateTarget).parent();
+  var html = jQuery('html');
+  html.css('overflowX', 'hidden');
+  article.addClass(article.data('animation-class'));
+  article.bind('oanimationend animationend webkitAnimationEnd', function() {
+  	article.remove();
+  	html.removeAttr('style');
+  });
+};
+
+jQuery(function() {
+  jQuery('button').on('click', removeArticle);
+});
+    </script>
+</body>
